@@ -1,16 +1,16 @@
 import "@/styles/globals.css";
 import type { AppProps } from "next/app";
 
-import { Roboto } from "next/font/google";
+import { Kanit } from "next/font/google";
 
-const roboto = Roboto({
-  weight: "400",
+const kanit = Kanit({
+  weight: "600",
   subsets: ["latin"],
 });
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
-    <main className={roboto.className}>
+    <main className={kanit.className}>
       <Component {...pageProps} />
     </main>
   );
