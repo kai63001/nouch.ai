@@ -15,9 +15,11 @@ const LayoutIndex = (props: Layout) => {
       <Header title={props.title} des={props.des} image={props.image} />
       <div className="flex">
         <LeftNevbar/>
+        <div className="pl-14 md:pl-80 w-full">
+        {props.children}
+        </div>
       </div>
 
-      {props.children}
     </>
   );
 };
