@@ -8,7 +8,7 @@ interface Header {
   image?: string
 }
 
-const HeaderIndex = (props: Header) => {
+const Header = (props: Header) => {
   const router = useRouter()
 
   return (
@@ -53,4 +53,4 @@ const HeaderIndex = (props: Header) => {
   )
 }
 
-export default HeaderIndex
+export default Header

@@ -9,7 +9,7 @@ interface Layout {
 }
 
 
-const LayoutIndex = (props: Layout) => {
+const Layout = (props: Layout) => {
   return (
     <>
       <Header title={props.title} des={props.des} image={props.image} />
@@ -24,4 +24,4 @@ const LayoutIndex = (props: Layout) => {
   );
 };
 
-export default LayoutIndex;
+export default Layout;
