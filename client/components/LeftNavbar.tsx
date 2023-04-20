@@ -105,8 +105,8 @@ const LeftNevbar = () => {
           ) : (
             <Link
               className="cursor-pointer flex items-center text-white hover:bg-secondary duration-150 border-secondary border-2 w-full rounded-md md:px-9 md:py-3 py-1 md:space-x-3 justify-center md:justify-start"
-              href={"/?singin=true"}
-              as={"/signin"}
+              href={"?login=true"}
+              as={"/login"}
             >
               <Image
                 src="/icon/login.png"
@@ -120,8 +120,8 @@ const LeftNevbar = () => {
         </div>
       </div>
       <Modal
-        isOpen={!!router.query.singin}
-        onRequestClose={() => router.push("/")}
+        isOpen={!!router.query.login}
+        onRequestClose={() => router.push(router.pathname)}
         ariaHideApp={false}
         overlayClassName={`fixed top-0 left-0 w-full h-full bg-black bg-opacity-40 z-50 flex items-center justify-center`}
         className="bg-primary w-11/12 md:w-5/12 rounded-xl shadow-lg px-14 py-10 duration-200 items-center"
