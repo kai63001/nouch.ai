@@ -5,15 +5,17 @@ import (
 
 	"github.com/gofiber/fiber/v2"
 	"github.com/joho/godotenv"
+	"nouch.co/m/database"
 	"nouch.co/m/router"
 )
 
 func main() {
-	app := fiber.New()
-
+	// end
 	if err := godotenv.Load(); err != nil {
 		log.Fatal("Error loading .env file")
 	}
+	database.Mongodb()
+	app := fiber.New()
 
 	router.AuthRouter(app)
 

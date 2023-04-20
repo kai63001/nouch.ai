@@ -19,7 +19,20 @@ func GoogleLogin(c *fiber.Ctx) error {
 	if errVerify != nil {
 		return c.Status(500).JSON(bson.M{"status": "error", "message": errVerify.Error()})
 	}
-	token, errToken := service.CreateJwtToken(payload)
+	var id string
+	// check email is duplicate
+	result, check := service.CheckEmailisDuplicate(payload["email"].(string))
+	if check {
+		id = result
+	} else {
+		// register user
+		resultId, errRegister := service.RegisterGoogleUser(payload)
+		if errRegister != nil {
+			return c.Status(500).JSON(bson.M{"status": "error", "message": errRegister.Error()})
+		}
+		id = resultId
+	}
+	token, errToken := service.CreateJwtToken(payload, id)
 	if errToken != nil {
 		return c.Status(500).JSON(bson.M{"status": "error", "message": errToken.Error()})
 	}

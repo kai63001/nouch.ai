@@ -4,7 +4,10 @@ import (
 	"context"
 	"os"
 
+	"go.mongodb.org/mongo-driver/bson"
+	"go.mongodb.org/mongo-driver/bson/primitive"
 	"google.golang.org/api/idtoken"
+	"nouch.co/m/database"
 )
 
 func VerifyGoogleToken(token string) (map[string]interface{}, error) {
@@ -15,6 +18,32 @@ func VerifyGoogleToken(token string) (map[string]interface{}, error) {
 	return payload.Claims, nil
 }
 
-func CheckEmailisDuplicate(email string) bool {
-	return false
+type UserData struct {
+	Email   string `json:"email"`
+	Name    string `json:"name"`
+	Picture string `json:"picture"`
+	Id      string `bson:"_id,omitempty"`
+}
+
+func CheckEmailisDuplicate(email string) (string, bool) {
+	var user UserData
+	err := database.ClientDB.Collection("users").FindOne(context.TODO(), bson.M{"email": email}).Decode(&user)
+	if err != nil {
+		return "", false
+	}
+	return user.Id, true
+}
+
+func RegisterGoogleUser(payload map[string]interface{}) (string, error) {
+	user := UserData{
+		Email:   payload["email"].(string),
+		Name:    payload["name"].(string),
+		Picture: payload["picture"].(string),
+	}
+	result, err := database.ClientDB.Collection("users").InsertOne(context.TODO(), user)
+	if err != nil {
+		return "", err
+	}
+	//return lst
+	return result.InsertedID.(primitive.ObjectID).Hex(), err
 }

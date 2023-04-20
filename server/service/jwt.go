@@ -7,7 +7,7 @@ import (
 	"github.com/golang-jwt/jwt"
 )
 
-func CreateJwtToken(data map[string]interface{}) (string, error) {
+func CreateJwtToken(data map[string]interface{}, id string) (string, error) {
 	token := jwt.NewWithClaims(jwt.SigningMethodHS256, jwt.MapClaims{
 		//exp at 7 day from now
 		"exp": time.Now().Add(time.Hour*24*7).Unix() * 1000,
@@ -16,6 +16,7 @@ func CreateJwtToken(data map[string]interface{}) (string, error) {
 		"email":   data["email"],
 		"name":    data["name"],
 		"picture": data["picture"],
+		"id":      id,
 	})
 	tokenString, err := token.SignedString([]byte(os.Getenv("SECRET_JWT")))
 	if err != nil {
