@@ -28,6 +28,7 @@ export const authOptions = {
     },
     //sign in
     async signIn({  account, profile }:any) {
+      console.log(account,profile)
       if (account.provider === 'google') {
         console.log('google')
 
