@@ -1,10 +1,24 @@
-import { Kanit } from "next/font/google";
-import Image from "next/image";
+import { signIn, useSession } from 'next-auth/react'
+import { Kanit } from 'next/font/google'
+import Image from 'next/image'
+
 const kanit = Kanit({
-  weight: "600",
-  subsets: ["latin"],
-});
+  weight: '600',
+  subsets: ['latin']
+})
+
 const SiginModal = () => {
+  const { data } = useSession()
+  console.log(data)
+  const continueWithGoogle = (e:any) => {
+    e.preventDefault()
+    signIn('google', {
+      callbackUrl: `${window.location.origin}`
+    }).catch((err) => {
+      console.error('err', err)
+    })
+  }
+
   return (
     <div className={`flex flex-col items-center ${kanit.className}`}>
       <Image
@@ -19,7 +33,7 @@ const SiginModal = () => {
         people. Please note that I do not retain any personal information
       </p>
       <div className="w-full flex flex-col space-y-2 mt-5">
-        <div className="w-full cursor-pointer flex items-center text-white hover:bg-secondary duration-150 border-secondary border-2 rounded-md md:px-9 md:py-3 py-1 md:space-x-3 justify-center">
+        <div onClick={continueWithGoogle} className="w-full cursor-pointer flex items-center text-white hover:bg-secondary duration-150 border-secondary border-2 rounded-md md:px-9 md:py-3 py-1 md:space-x-3 justify-center">
           <Image
             src="/icon/google.png"
             width={25}
@@ -39,7 +53,7 @@ const SiginModal = () => {
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default SiginModal;
+export default SiginModal
