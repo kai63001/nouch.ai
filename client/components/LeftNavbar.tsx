@@ -7,7 +7,7 @@ const rubik = Rubik({
 });
 const LeftNevbar = () => {
   return (
-    <nav className="h-screen fixed bg-primary w-14 md:w-80 px-3 md:px-5 py-5">
+    <nav className="h-screen fixed bg-primary w-14 md:w-80 px-3 md:px-5 py-5 flex flex-col justify-between">
       <div className="flex flex-col">
         <div className="flex space-x-2 items-center justify-start">
           <Image
@@ -27,6 +27,17 @@ const LeftNevbar = () => {
           >
             <Image src="/icon/cmd.png" width={25} height={25} alt="Prompt" />
             <span className="hidden md:inline">Prompts</span>
+          </a>
+        </div>
+      </div>
+      <div className="flex flex-col">
+        <div className="flex flex-col mt-10">
+          <a
+            href="/"
+            className="flex items-center text-white hover:bg-secondary duration-150 border-secondary border-2 w-full rounded-md md:px-9 md:py-3 py-1 md:space-x-3 justify-center md:justify-start"
+          >
+            <Image src="/icon/login.png" width={25} height={25} alt="login image" />
+            <span className="hidden md:inline">Sign in</span>
           </a>
         </div>
       </div>
