@@ -1,4 +1,4 @@
-import { signIn, useSession } from 'next-auth/react'
+import { signIn } from 'next-auth/react'
 import { Kanit } from 'next/font/google'
 import Image from 'next/image'
 
@@ -8,8 +8,6 @@ const kanit = Kanit({
 })
 
 const SiginModal = () => {
-  const { data } = useSession()
-  console.log(data)
   const continueWithGoogle = (e:any) => {
     e.preventDefault()
     signIn('google', {
@@ -18,6 +16,7 @@ const SiginModal = () => {
       console.error('err', err)
     })
   }
+
 
   return (
     <div className={`flex flex-col items-center ${kanit.className}`}>

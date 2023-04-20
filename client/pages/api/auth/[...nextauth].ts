@@ -1,7 +1,8 @@
 import NextAuth from "next-auth"
 import GithubProvider from "next-auth/providers/github"
 import GoogleProvider from "next-auth/providers/google"
-import jwt from 'jsonwebtoken'
+import { NextApiRequest, NextApiResponse } from "next"
+import axios from '@/libs/axios'
 
 export const authOptions = {
   // Configure one or more authentication providers
@@ -18,25 +19,39 @@ export const authOptions = {
   callbacks: {
     async jwt({ token,user, account }:any) {
       if (account) {
-        token.accessToken = account.access_token
+        token.token = account.token
+        token.id = account.id
       }
       return token
     },
     async session({ session, token, user }:any) {
-      session.accessToken = token.accessToken
+      session.token = token.token
+      session.id = token.id
       return session
     },
     //sign in
-    async signIn({  account, profile }:any) {
-      console.log(account,profile)
+    async signIn({  account }:any) {
       if (account.provider === 'google') {
-        console.log('google')
+        try {
+          const res = await axios.post('/auth/google', {
+            id_token: account.id_token
+          })
+          account.token = await res.data.token
+          account.id = await res.data.id
+  
+          return true
+        } catch (error) {
+          console.log(error)
+          return false
+        }
 
       }
       return true
     }
   },
+  pages: {},
   secret: process.env.NEXT_PUBLIC_SECRET_JWT
 }
-
-export default NextAuth(authOptions)
+const Auth = (req: NextApiRequest, res: NextApiResponse<any>) =>
+  NextAuth(req, res, authOptions)
+export default Auth

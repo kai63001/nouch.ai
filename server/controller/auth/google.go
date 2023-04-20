@@ -1,6 +1,8 @@
 package controller
 
 import (
+	"fmt"
+
 	"github.com/gofiber/fiber/v2"
 	"go.mongodb.org/mongo-driver/bson"
 	"nouch.co/m/service"
@@ -13,6 +15,7 @@ type PostGoogleLogin struct {
 func GoogleLogin(c *fiber.Ctx) error {
 	var data PostGoogleLogin
 	if err := c.BodyParser(&data); err != nil {
+		fmt.Println(err.Error())
 		return c.Status(500).JSON(bson.M{"status": "error", "message": err.Error()})
 	}
 	payload, errVerify := service.VerifyGoogleToken(data.IdToken)
@@ -36,5 +39,5 @@ func GoogleLogin(c *fiber.Ctx) error {
 	if errToken != nil {
 		return c.Status(500).JSON(bson.M{"status": "error", "message": errToken.Error()})
 	}
-	return c.Status(200).JSON(bson.M{"status": "success", "token": token})
+	return c.Status(200).JSON(bson.M{"status": "success", "token": token, "id": id})
 }
