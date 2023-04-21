@@ -123,7 +123,7 @@ const LeftNevbar = () => {
         isOpen={!!router.query.login}
         onRequestClose={() => router.push(router.pathname)}
         ariaHideApp={false}
-        overlayClassName={`fixed top-0 left-0 w-full h-full bg-black bg-opacity-40 z-50 flex items-center justify-center`}
+        overlayClassName={`fixed top-0 left-0 w-full h-full bg-black bg-opacity-40 z-20 flex items-center justify-center`}
         className="bg-primary w-11/12 md:w-5/12 rounded-xl shadow-lg px-14 py-10 duration-200 items-center"
       >
         <SiginModal />
