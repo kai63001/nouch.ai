@@ -23,7 +23,7 @@ const LeftNevbar = () => {
   return (
     <nav className="h-screen fixed bg-primary w-14 md:w-80 px-3 md:px-5 py-5 flex flex-col justify-between">
       <div className="flex flex-col">
-        <div className="flex space-x-2 items-center justify-start">
+        <Link href='/' className="flex space-x-2 items-center justify-start">
           <Image
             src="/icon/favicon.png"
             width={35}
@@ -33,7 +33,7 @@ const LeftNevbar = () => {
           <div className={`text-3xl ${rubik.className} hidden md:inline`}>
             Nouch
           </div>
-        </div>
+        </Link>
         <div className="flex flex-col mt-10">
           <Link
             href="/"
@@ -70,13 +70,13 @@ const LeftNevbar = () => {
                   </div>
                 </div>
                 <div
-                  className="cursor-pointer flex items-center text-white hover:bg-gray-600 duration-150 border-gray-600 border-2 w-full rounded-md md:px-9 md:py-3 py-1 md:space-x-3 justify-center"
+                  className="cursor-pointer flex items-center text-white hover:bg-gray-600 duration-150 border-gray-600 border-2 w-full rounded-md md:px-9 md:py-2 py-1 md:space-x-3 justify-center"
                   onClick={() => signOut()}
                 >
                   <Image
                     src="/icon/logout2.png"
-                    width={25}
-                    height={25}
+                    width={20}
+                    height={20}
                     alt="logout image"
                   />
                   <span className="">Log out</span>
