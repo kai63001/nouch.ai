@@ -23,7 +23,7 @@ const LeftNevbar = () => {
   return (
     <nav className="h-screen fixed bg-primary w-14 md:w-80 px-3 md:px-5 py-5 flex flex-col justify-between">
       <div className="flex flex-col">
-        <Link href='/' className="flex space-x-2 items-center justify-start">
+        <Link href='/' className="flex space-x-2 items-center justify-start mt-3">
           <Image
             src="/icon/favicon.png"
             width={35}

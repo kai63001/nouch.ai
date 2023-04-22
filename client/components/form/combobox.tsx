@@ -1,10 +1,12 @@
+import { useState } from "react";
+
 const ComboBox = () => {
+  const [open, setOpen] = useState(false);
+
   return (
     <div className="mt-2">
       <div className="flex cursor-pointer items-center justify-between bg-secondary px-5 py-2 w-full rounded-md">
-        <div className=" text-gray-400">
-          Select Category
-        </div>
+        <div className=" text-gray-400">Select Category</div>
         {/* icon dropdown or arrow down */}
         <svg
           xmlns="http://www.w3.org/2000/svg"

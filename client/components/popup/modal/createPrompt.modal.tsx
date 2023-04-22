@@ -27,7 +27,7 @@ const CreatePromptModal = () => {
         </span>
       </div>
       <div className="mt-2">
-        <label htmlFor="description">Prompt Text</label>
+        <label htmlFor="description">Description</label>
         <textarea
           rows={8}
           name="description"
