@@ -1,5 +1,6 @@
 import Header from "./Header";
 import LeftNevbar from "./LeftNavbar";
+import Navbar from "./Navbar";
 
 interface Layout {
   title?: string | undefined;
@@ -12,9 +13,9 @@ const Layout = (props: Layout) => {
   return (
     <>
       <Header title={props.title} des={props.des} image={props.image} />
-      <div className="flex">
-        <LeftNevbar />
-        <div className="pl-14 md:pl-80 w-full">{props.children}</div>
+      <Navbar />
+      <div className="max-w-[1800px] mx-auto mt-3 px-2 xs:px-0">
+        {props.children}
       </div>
     </>
   );

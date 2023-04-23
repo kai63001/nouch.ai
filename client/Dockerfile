@@ -5,15 +5,13 @@ ENV NODE_ENV=production
 # Set the working directory
 WORKDIR /usr/src/app
 
-# Copy the package.json and package-lock.json
-COPY package*.json ./
+# Copy the source code
+COPY . .
 
 # Install dependencies and clean the cache using pnpm
 RUN npm install -g pnpm 
 RUN pnpm install
 
-# Copy the source code
-COPY . .
 
 # Expose the port
 EXPOSE 3000
