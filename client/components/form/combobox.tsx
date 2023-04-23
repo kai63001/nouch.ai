@@ -1,11 +1,13 @@
 import { useState } from "react";
+import ReactModal from "react-modal";
+import ListCategoryModal from "./modal/listCategory.modal";
 
 const ComboBox = () => {
   const [open, setOpen] = useState(false);
 
   return (
     <div className="mt-2">
-      <div className="flex cursor-pointer items-center justify-between bg-secondary px-5 py-2 w-full rounded-md">
+      <div onClick={()=>setOpen(true)} className="flex cursor-pointer items-center justify-between bg-secondary px-5 py-2 w-full rounded-md">
         <div className=" text-gray-400">Select Category</div>
         {/* icon dropdown or arrow down */}
         <svg
@@ -23,6 +25,15 @@ const ComboBox = () => {
           />
         </svg>
       </div>
+      <ReactModal
+        isOpen={open}
+        onRequestClose={() => setOpen(false)}
+        ariaHideApp={false}
+        overlayClassName={`fixed top-0 left-0 w-full h-full bg-white bg-opacity-20 z-10 flex items-center justify-center overflow-y-auto`}
+        className="bg-black w-11/12 md:w-7/12 rounded-xl shadow-lg px-14 py-10 duration-200 items-center"
+      >
+        <ListCategoryModal></ListCategoryModal>
+      </ReactModal>
     </div>
   );
 };
