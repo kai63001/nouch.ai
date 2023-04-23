@@ -19,7 +19,7 @@ jobs:
         command_timeout: 20m
         script: |
           cd nouch.ai/
-          git pull origin main -f
+          git pull origin master -f
           docker stack rm nouch
           docker-compose down --volumes
           docker-compose up -d --build
