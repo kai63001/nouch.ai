@@ -20,8 +20,7 @@ jobs:
         script: |
           cd nouch.ai/
           git pull origin main -f
-          docker-compose down --volumes
+          docker stack rm nouch
           docker-compose up -d --build
           docker-compose down --volumes
-          docker stack rm nouch
           docker stack deploy -c docker-compose.yml nouch 
