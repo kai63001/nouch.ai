@@ -9,7 +9,8 @@ WORKDIR /usr/src/app
 COPY package*.json ./
 
 # Install dependencies and clean the cache using pnpm
-RUN npm install -g pnpm && pnpm install --production
+RUN npm install -g pnpm 
+RUN pnpm install --production
 RUN pnpm add sharp
 # Copy the source code
 COPY . .
