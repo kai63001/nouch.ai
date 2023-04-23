@@ -10,8 +10,8 @@ COPY package*.json ./
 
 # Install dependencies and clean the cache using pnpm
 RUN npm install -g pnpm 
-RUN pnpm install --production
-RUN pnpm add sharp
+RUN pnpm install
+
 # Copy the source code
 COPY . .
 
