@@ -1,15 +1,16 @@
 # Docker File Node 19
-FROM node:19.9.0-alpine3.14
+FROM node:19-alpine3.16
+ENV NODE_ENV=production
 
 # Set the working directory
-WORKDIR /app
+WORKDIR /usr/src/app
 
 # Copy the package.json and package-lock.json
 COPY package*.json ./
 
 # Install dependencies and clean the cache using pnpm
 RUN npm install -g pnpm && pnpm install --production
-
+RUN pnpm add sharp
 # Copy the source code
 COPY . .
 

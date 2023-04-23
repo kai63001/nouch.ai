@@ -1,8 +1,8 @@
 # Docker file production for go 1.20.3
-FROM golang:1.20.3-alpine3.14
+FROM golang:1.20.3-alpine3.17
 
 # Set the working directory
-WORKDIR /app
+WORKDIR /usr/src/app
 
 # Copy the source code
 COPY . .
