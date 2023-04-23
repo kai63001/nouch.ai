@@ -18,7 +18,7 @@ jobs:
         port: ${{ secrets.PORT }}
         command_timeout: 20m
         script: |
-          cd nouch/
+          cd nouch.ai/
           git pull origin main -f
           docker-compose down --volumes
           docker-compose up -d --build
