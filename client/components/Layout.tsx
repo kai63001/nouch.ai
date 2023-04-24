@@ -6,7 +6,7 @@ interface Layout {
   title?: string | undefined;
   des?: string | undefined;
   image?: string | undefined;
-  children?: any | undefined;
+  children?: JSX.Element;
 }
 
 const Layout = (props: Layout) => {
