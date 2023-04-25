@@ -10,5 +10,4 @@ func AuthRouter(app *fiber.App) {
 	api := app.Group("/auth", logger.New())
 	api.Post("/google", controller.GoogleLogin)
 	api.Post("/dev", controller.DevLogin)
-
 }

@@ -10,19 +10,20 @@ import (
 	"nouch.co/m/database"
 )
 
+type UserData struct {
+	Email           string `json:"email"`
+	Name            string `json:"name"`
+	Picture         string `json:"picture"`
+	Id              string `bson:"_id,omitempty"`
+	StripeAccountId string `bson:"stripe_account_id,omitempty"`
+}
+
 func VerifyGoogleToken(token string) (map[string]interface{}, error) {
 	payload, err := idtoken.Validate(context.Background(), token, os.Getenv("GOOGLE_CLIENT_ID"))
 	if err != nil {
 		return make(map[string]interface{}), err
 	}
 	return payload.Claims, nil
-}
-
-type UserData struct {
-	Email   string `json:"email"`
-	Name    string `json:"name"`
-	Picture string `json:"picture"`
-	Id      string `bson:"_id,omitempty"`
 }
 
 func CheckEmailisDuplicate(email string) (string, bool) {

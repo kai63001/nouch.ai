@@ -26,6 +26,7 @@ func main() {
 	})
 
 	router.AuthRouter(app)
+	router.StripeRouter(app)
 
 	log.Fatal(app.Listen(":4000"))
 }
