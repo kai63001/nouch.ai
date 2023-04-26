@@ -11,17 +11,27 @@ import (
 	"nouch.co/m/database"
 )
 
-func CreateStandardAccount(token string) (map[string]interface{}, error) {
+func CreateStandardAccount(token string, country string) (map[string]interface{}, error) {
+
+	// ? Check if country is supported
+	countryData, err := checkCountryIsSupported(country)
+	if err != nil {
+		return make(map[string]interface{}), err
+	}
+
+	// ? Get data from token
 	data, err := GetJwtClaims(token)
 	if err != nil {
 		return make(map[string]interface{}), err
 	}
 
-	stripeAccountId, err := getStripeAccountId(data.Email)
+	// ? Check if user has already created an account by have stripe_account_id in user document
+	stripeAccountId, err := getStripeAccountId(data.Email, countryData.Code)
 	if err != nil {
 		return make(map[string]interface{}), err
 	}
 
+	// ? Create a new account
 	connectionLink, err := createAccountConnectLink(stripeAccountId)
 	if err != nil {
 		return make(map[string]interface{}), err
@@ -33,7 +43,27 @@ func CreateStandardAccount(token string) (map[string]interface{}, error) {
 	}, nil
 }
 
-func getStripeAccountId(email string) (string, error) {
+type SupportedCountries struct {
+	Name string `bson:"name"`
+	Code string `bson:"code"`
+}
+
+func checkCountryIsSupported(country string) (SupportedCountries, error) {
+	// * Check if country is supported
+	// * If not, return error
+	// * If yes, return true
+	var supportedCountries SupportedCountries
+	err := database.ClientDB.Collection("stripe_countries").FindOne(context.TODO(), bson.M{
+		"name": country,
+	}).Decode(&supportedCountries)
+	if err != nil {
+		return supportedCountries, err
+	}
+
+	return supportedCountries, nil
+}
+
+func getStripeAccountId(email string, country string) (string, error) {
 	// * Check if user has already created an account by have stripe_account_id in user document
 	// * If not, create a new account
 	// * If yes, return the account id
@@ -49,7 +79,7 @@ func getStripeAccountId(email string) (string, error) {
 		// * Save the account id in user document
 		stripe.Key = os.Getenv("SCRIPE_SECRET_KEY")
 
-		params := &stripe.AccountParams{Type: stripe.String(string(stripe.AccountTypeStandard))}
+		params := &stripe.AccountParams{Type: stripe.String(string(stripe.AccountTypeStandard)), Country: stripe.String(country)}
 		result, _ := account.New(params)
 		user.StripeAccountId = result.ID
 		//update to database
