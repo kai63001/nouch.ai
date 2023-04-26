@@ -3,17 +3,24 @@ package controller
 import (
 	"github.com/gofiber/fiber/v2"
 	"go.mongodb.org/mongo-driver/bson"
+	"nouch.co/m/middleware"
 	"nouch.co/m/service"
 )
 
 type CreateAccountRequest struct {
-	Country string `json:"country"`
+	Country string `json:"country" validate:"required"`
 }
 
 func CreateAccount(c *fiber.Ctx) error {
+
 	var body CreateAccountRequest
 	if err := c.BodyParser(&body); err != nil {
 		return c.Status(400).JSON(err.Error())
+	}
+	//validate request
+	er := middleware.ValidationMiddleware(body)
+	if er != nil {
+		return c.Status(400).JSON(bson.M{"status": 400, "message": er})
 	}
 	// get token from header authorization
 	token := c.Get("Authorization")
