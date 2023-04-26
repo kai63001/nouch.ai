@@ -4,9 +4,10 @@ import (
 	"github.com/gofiber/fiber/v2"
 	"github.com/gofiber/fiber/v2/middleware/logger"
 	controller "nouch.co/m/controller/stripe"
+	"nouch.co/m/middleware"
 )
 
 func StripeRouter(app *fiber.App) {
-	api := app.Group("/stripe", logger.New())
+	api := app.Group("/stripe", logger.New(), middleware.AuthMiddleware)
 	api.Post("/createAccount", controller.CreateAccount)
 }
