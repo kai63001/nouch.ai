@@ -123,7 +123,7 @@ export default function Home() {
       <Layout>
         <div>
           <HeroSection />
-          <SectionCard />
+          <SectionCard title="test" content={MOCK_POPULAR_PROMT.content} />
         </div>
       </Layout>
     </div>
