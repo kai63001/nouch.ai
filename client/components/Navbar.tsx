@@ -1,9 +1,18 @@
+import { Quicksand } from "next/font/google";
 import Image from "next/image"
+import Link from "next/link"
+
+const quicksand = Quicksand({
+    weight: "700",
+    subsets: ["latin"],
+});
 
 const Navbar = () => {
     return (
-        <nav className="flex justify-between p-8">
-            <Image width={100} height={40} src={'/icon/logo-nouch.svg'} alt={"logo-nouch"} />
+        <nav className={`flex justify-between p-8 ${quicksand.className}`}>
+            <Link href='/'>
+                <Image width={100} height={40} src={'/icon/logo-nouch.svg'} alt={"logo-nouch"} />
+            </Link>
             <div className="flex gap-6 items-center">
                 <div className="hover:underline cursor-pointer">Explore</div>
                 <div className="hover:underline cursor-pointer">Create</div>
@@ -23,7 +32,7 @@ const Navbar = () => {
                     </svg>
                     <div>Discod</div>
                 </div> */}
-                <div className="bg-white text-black pl-5 p-5 pb-3 pt-3 rounded-[64px] cursor-pointer font-semibold">Log in</div>
+                <Link href="/login" className="bg-white text-black pl-5 p-5 pb-3 pt-3 rounded-[64px] cursor-pointer font-semibold">Log in</Link>
             </div>
         </nav>
     )

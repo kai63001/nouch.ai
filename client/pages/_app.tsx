@@ -2,21 +2,27 @@ import "@/styles/globals.css";
 import type { AppProps } from "next/app";
 import { SessionProvider } from "next-auth/react";
 import { Quicksand } from "next/font/google";
+import { createBrowserSupabaseClient } from '@supabase/auth-helpers-nextjs'
+import { SessionContextProvider, Session } from '@supabase/auth-helpers-react'
+import { useState } from 'react'
 
-const quicksand = Quicksand({
-  weight: "400",
-  subsets: ["latin"],
-});
 
-export default function App({
+function MyApp({
   Component,
-  pageProps: { session, ...pageProps },
-}: AppProps) {
+  pageProps,
+}: AppProps<{
+  initialSession: Session
+}>) {
+  const [supabaseClient] = useState(() => createBrowserSupabaseClient())
+
   return (
-    <main className={quicksand.className}>
-      <SessionProvider session={session}>
-        <Component {...pageProps} />
-      </SessionProvider>
-    </main>
-  );
+    <SessionContextProvider
+      supabaseClient={supabaseClient}
+      initialSession={pageProps.initialSession}
+    >
+      <Component {...pageProps} />
+    </SessionContextProvider>
+  )
 }
+
+export default MyApp;
