@@ -3,7 +3,7 @@ import Image from "next/image"
 const Navbar = () => {
     return (
         <nav className="flex justify-between p-8">
-            <Image width={100} height={40} src={'/icon/logo-nouch.svg'} alt={"logo-nouch"} />
+            <Image src={'/icon/logo-nouch.svg'} alt={"logo-nouch"} width={100} height={40} />
             <div className="flex gap-6 items-center">
                 <div className="hover:underline cursor-pointer">Explore</div>
                 <div className="hover:underline cursor-pointer">Create</div>

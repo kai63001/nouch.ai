@@ -6,7 +6,7 @@ const HeroSection: FC = () => {
         <div className="flex w-full gap-[120px]">
             <div className="flex w-full justify-center items-center flex-col ">
                 <div>
-                    <Image width={300} height={150} src={'/icon/logo-nouch.svg'} alt="background" />
+                    <Image src={'/icon/logo-nouch.svg'} alt="background" width={300} height={150} />
                     <div className="w-[500px] text-[18px]">Explore top prompts, produce better results, discover the Nouch ecosystem
                         in one place.
                     </div>

@@ -4,7 +4,6 @@ import { SessionProvider } from "next-auth/react";
 import { Quicksand } from "next/font/google";
 
 const quicksand = Quicksand({
-  weight: "400",
   subsets: ["latin"],
 });
 
