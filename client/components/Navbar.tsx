@@ -1,3 +1,5 @@
+import Avatar from "@/libs/avatar";
+import { useUser } from "@supabase/auth-helpers-react";
 import { Quicksand } from "next/font/google";
 import Image from "next/image"
 import Link from "next/link"
@@ -7,7 +9,9 @@ const quicksand = Quicksand({
     subsets: ["latin"],
 });
 
+
 const Navbar = () => {
+    const user = useUser()
     return (
         <nav className={`flex justify-between p-8 ${quicksand.className}`}>
             <Link href='/'>
@@ -32,7 +36,14 @@ const Navbar = () => {
                     </svg>
                     <div>Discod</div>
                 </div> */}
+                {!user ? (
                 <Link href="/login" className="bg-white text-black pl-5 p-5 pb-3 pt-3 rounded-[64px] cursor-pointer font-semibold">Log in</Link>
+                ) : (
+                    <div className="flex items-center space-x-5">
+                        <Image src={Avatar(user?.user_metadata)} width={32} height={32} className="rounded-full" alt={`avatar of ${user?.email}`} />
+                        <p>Romeo</p>
+                    </div>
+                )}
             </div>
         </nav>
     )

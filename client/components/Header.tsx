@@ -23,7 +23,9 @@ const Header = (props: Header) => {
           ? props.des
           : "prompt"
       }
-      canonical={`https://nouch.co${router.asPath}`}
+      canonical={`${typeof window !== 'undefined' && window.location.origin
+      ? window.location.origin
+      : 'http://localhost:3000/login'}${router.asPath}`}
       openGraph={{
         type: 'website',
         locale: 'en_EN',
