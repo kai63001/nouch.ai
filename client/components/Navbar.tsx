@@ -1,4 +1,4 @@
-import Avatar from "@/libs/avatar";
+import {Avatar, Username} from "@/libs/user";
 import { useUser } from "@supabase/auth-helpers-react";
 import { Quicksand } from "next/font/google";
 import Image from "next/image"
@@ -41,7 +41,7 @@ const Navbar = () => {
                 ) : (
                     <div className="flex items-center space-x-5">
                         <Image src={Avatar(user?.user_metadata)} width={32} height={32} className="rounded-full" alt={`avatar of ${user?.email}`} />
-                        <p>Romeo</p>
+                        <p>{ Username() }</p>
                     </div>
                 )}
             </div>

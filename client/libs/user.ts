@@ -1,4 +1,4 @@
-const Avatar = (metaData:any) => {
+export const Avatar = (metaData:any) => {
     let avatar = '/avatar/astronaut.png'
     if (metaData && metaData.avatar_url) {
         avatar = metaData.avatar_url
@@ -14,4 +14,15 @@ const Avatar = (metaData:any) => {
     return avatar
 }
 
-export default Avatar
+export const Username = () => {
+    let username = 'Anonymous'
+    const user = localStorage.getItem('user')
+    if (user) {
+        const userData = JSON.parse(user)
+        if (userData.username) {
+            username = userData.username
+        }
+    }
+    return username
+}
+
