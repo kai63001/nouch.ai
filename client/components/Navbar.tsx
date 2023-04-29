@@ -39,7 +39,7 @@ const Navbar = () => {
                 {!user ? (
                 <Link href="/login" className="bg-white text-black pl-5 p-5 pb-3 pt-3 rounded-[64px] cursor-pointer font-semibold">Log in</Link>
                 ) : (
-                    <div className="flex items-center space-x-3">
+                    <div className="flex items-center space-x-3 pl-5 p-5 pb-3 pt-3">
                         <Image src={Avatar(user?.user_metadata)} width={32} height={32} className="rounded-full" alt={`avatar of ${user?.email}`} />
                         <p>{ Username() }</p>
                     </div>
