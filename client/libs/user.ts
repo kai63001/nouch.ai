@@ -1,28 +1,34 @@
-export const Avatar = (metaData:any) => {
-    let avatar = '/avatar/astronaut.png'
-    if (metaData && metaData.avatar_url) {
-        avatar = metaData.avatar_url
-    }
+export const Avatar = (metaData: any,local:any) => {
+  let avatar = "/avatar/astronaut.png";
+  if (metaData && metaData.avatar_url) {
+    avatar = metaData.avatar_url;
+  }
 
-    const user = localStorage.getItem('user')
-    if (user) {
-        const userData = JSON.parse(user)
-        if (userData.picture) {
-            avatar = userData.picture
-        }
-    }
-    return avatar
-}
+  if(local){
+    return local;
+  }
 
-export const Username = () => {
-    let username = 'Anonymous'
-    const user = localStorage.getItem('user')
-    if (user) {
-        const userData = JSON.parse(user)
-        if (userData.username) {
-            username = userData.username
-        }
+  const user = localStorage.getItem("user");
+  if (user) {
+    const userData = JSON.parse(user);
+    if (userData.picture) {
+      avatar = userData.picture;
     }
-    return username
-}
+  }
+  return avatar;
+};
 
+export const Username = (local: any) => {
+  let username = "Anonymous";
+  if (local) {
+    return local;
+  }
+  const user = localStorage.getItem("user");
+  if (user) {
+    const userData = JSON.parse(user);
+    if (userData.username) {
+      username = userData.username;
+    }
+  }
+  return username;
+};
