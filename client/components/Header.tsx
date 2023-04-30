@@ -23,9 +23,7 @@ const Header = (props: Header) => {
           ? props.des
           : "prompt"
       }
-      canonical={`${typeof window !== 'undefined' && window.location.origin
-      ? window.location.origin
-      : 'http://localhost:3000/login'}${router.asPath}`}
+      canonical={`https://nouch.co${router.asPath}`}
       openGraph={{
         type: 'website',
         locale: 'en_EN',
@@ -39,11 +37,11 @@ const Header = (props: Header) => {
           {
             url:
               props.image === undefined || props.image.length === 0
-                ? 'https://nouch.io/main.jpg'
+                ? 'https://nouch.co/main.jpg'
                 : props.image
           }
         ],
-        url: `https://nouch.io${router.asPath}`,
+        url: `https://nouch.co${router.asPath}`,
         site_name: 'nouch'
       }}
       twitter={{
