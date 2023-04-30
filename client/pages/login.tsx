@@ -32,11 +32,7 @@ const LoginPage = () => {
       <Layout>
         <div className="max-w-3xl m-auto bg-[#212121] p-10 rounded-md mt-40">
           <Auth
-            redirectTo={`${
-              typeof window !== "undefined" && window.location.origin
-                ? window.location.origin
-                : "http://localhost:3000"
-            }`}
+            redirectTo={`${process.env.NEXT_PUBLIC_CLIENT_URL}`}
             appearance={{
               theme: ThemeSupa,
               className: {
