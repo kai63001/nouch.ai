@@ -9,7 +9,7 @@ const quicksand = Quicksand({
 
 const Navbar = () => {
     return (
-        <nav className={`flex justify-between p-8 ${quicksand.className}`}>
+        <nav className={`hidden lg:flex justify-between p-8 ${quicksand.className}`}>
             <Link href='/'>
                 <Image width={100} height={40} src={'/icon/logo-nouch.svg'} alt={"logo-nouch"} />
             </Link>
