@@ -1,28 +1,29 @@
-import "@/styles/globals.css";
+import "@/styles/globals.scss";
 import type { AppProps } from "next/app";
-import { SessionProvider } from "next-auth/react";
-import { Quicksand } from "next/font/google";
-import { createBrowserSupabaseClient } from '@supabase/auth-helpers-nextjs'
-import { SessionContextProvider, Session } from '@supabase/auth-helpers-react'
-import { useState } from 'react'
-
+import { createBrowserSupabaseClient } from "@supabase/auth-helpers-nextjs";
+import { SessionContextProvider, Session } from "@supabase/auth-helpers-react";
+import { useState } from "react";
+import { store } from "@/store/store";
+import { Provider } from 'react-redux'
 
 function MyApp({
   Component,
   pageProps,
 }: AppProps<{
-  initialSession: Session
+  initialSession: Session;
 }>) {
-  const [supabaseClient] = useState(() => createBrowserSupabaseClient())
+  const [supabaseClient] = useState(() => createBrowserSupabaseClient());
 
   return (
     <SessionContextProvider
       supabaseClient={supabaseClient}
       initialSession={pageProps.initialSession}
     >
-      <Component {...pageProps} />
+      <Provider store={store}>
+        <Component {...pageProps} />
+      </Provider>
     </SessionContextProvider>
-  )
+  );
 }
 
 export default MyApp;

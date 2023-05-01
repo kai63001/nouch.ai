@@ -37,11 +37,11 @@ const Header = (props: Header) => {
           {
             url:
               props.image === undefined || props.image.length === 0
-                ? 'https://nouch.io/main.jpg'
+                ? 'https://nouch.co/main.jpg'
                 : props.image
           }
         ],
-        url: `https://nouch.io${router.asPath}`,
+        url: `https://nouch.co${router.asPath}`,
         site_name: 'nouch'
       }}
       twitter={{

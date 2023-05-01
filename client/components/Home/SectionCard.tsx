@@ -28,6 +28,7 @@ const SectionCard: FC<SectionCardProps> = (props) => {
     const navigationPrevRef = useRef(null)
     const navigationNextRef = useRef(null)
 
+
     return (
         <div>
             <div className="flex justify-between mb-8">
@@ -36,7 +37,7 @@ const SectionCard: FC<SectionCardProps> = (props) => {
             </div>
             <div className="relative group">
                 <div ref={navigationPrevRef}>
-                    <div className="hidden group-hover:flex select-none w-[40px] h-[40px] bg-white  items-center justify-center rounded-full rotate-180 cursor-pointer absolute left-0 top-[50%] translate-y-[-50%] translate-x-[calc(100%+16px)] z-[2]">
+                    <div className="lg:hidden group-hover:flex select-none w-[40px] h-[40px] bg-white  items-center justify-center rounded-full rotate-180 cursor-pointer absolute left-0 top-[50%] translate-y-[-50%] translate-x-[calc(100%+16px)] z-[10]">
                         <Image width={10} height={15} src={'/icon/arrow-left.svg'} alt="arrow-left" />
                     </div>
                 </div>
@@ -61,7 +62,7 @@ const SectionCard: FC<SectionCardProps> = (props) => {
                     ))}
                 </Swiper>
                 <div ref={navigationNextRef} >
-                    <div className="hidden group-hover:flex select-none w-[40px] h-[40px] bg-white items-center justify-center rounded-full cursor-pointer absolute right-0 top-[50%] translate-y-[-50%] translate-x-[calc(-100%-16px)] z-[2]">
+                    <div className="lg:hidden group-hover:flex select-none w-[40px] h-[40px] bg-white items-center justify-center rounded-full cursor-pointer absolute right-0 top-[50%] translate-y-[-50%] translate-x-[calc(-100%-16px)] z-[10]">
                         <Image width={10} height={15} src={'/icon/arrow-left.svg'} alt="arrow-left" />
                     </div>
                 </div>
