@@ -1,4 +1,4 @@
-import type { FC } from "react"
+import { FC, useEffect, useState } from "react"
 import Card from "./Card"
 import SwiperCore, { Virtual, Navigation, Pagination } from 'swiper';
 import { Swiper, SwiperSlide } from 'swiper/react';
@@ -17,9 +17,15 @@ SwiperCore.use([Virtual, Navigation, Pagination]);
 
 const PrototypeSection: FC<PrototypeSectionProps> = (props) => {
     const { title, content } = props
+    const [screemSize, setScreemSize] = useState(0)
+
+    useEffect(() => {
+        setScreemSize(window.innerWidth)
+    }, [screemSize])
+
 
     return (
-        <div className="bg-[#1D1D1D] flex justify-between rounded-[24px] py-[32px] px-[50px]">
+        <div className="bg-[#1D1D1D] hidden lg:flex justify-between rounded-[24px] py-[32px] px-[50px]">
             <div className="w-[280px] flex flex-col justify-center">
                 <div className="text-[34px] font-bold">{title}</div>
                 <div className="flex gap-2">
