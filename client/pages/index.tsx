@@ -13,7 +13,7 @@ export default function Home() {
       <Layout>
         <div>
           <HeroSection />
-          <div className="mx-[40px] md:mx-[80px]">
+          <div className="">
             <div className="mt-24">
               <SectionCard autoSlide title={MOCK_POPULAR_PROMT.title} content={MOCK_POPULAR_PROMT.content} />
             </div>
