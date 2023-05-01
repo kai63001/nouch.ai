@@ -70,11 +70,11 @@ const Navbar = () => {
   const user = useUser();
   //useEffect when localStorage is updated
   return (
-    <nav className={`hidden lg:flex justify-between p-8 ${quicksand.className}`}>
+    <nav className={`flex justify-between p-8 ${quicksand.className}`}>
       <Link href='/'>
         <Image width={100} height={40} src={'/icon/logo-nouch.svg'} alt={"logo-nouch"} />
       </Link>
-      <div className="flex gap-6 items-center">
+      <div className="hidden gap-6 items-center lg:flex">
         <div className="hover:underline cursor-pointer">Explore</div>
         <div className="hover:underline cursor-pointer">Create</div>
         <div className="hover:underline cursor-pointer">Docs</div>
@@ -106,7 +106,7 @@ const Navbar = () => {
               <p>{Username(username)}</p>
             </div>
             {showDropdown && (
-              <div className="absolute bg-[#1E1E1E] rounded-md w-[200px] mt-5 right-10 border-[#383838] border">
+              <div className="absolute bg-[#1E1E1E] rounded-md w-[200px] mt-5 right-10 border-[#383838] border z-50">
                 {/* dropdown */}
                 <div className="flex flex-col gap-2 py-2 border-b border-[#383838]">
                   <Link href="/profile" className="p-2 hover:bg-[#2E2E2E]">
