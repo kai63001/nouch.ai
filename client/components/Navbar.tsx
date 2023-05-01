@@ -4,7 +4,7 @@ import { useUser } from "@supabase/auth-helpers-react";
 import { Quicksand } from "next/font/google";
 import Image from "next/image";
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 const quicksand = Quicksand({
   weight: "700",
@@ -15,6 +15,21 @@ const Navbar = () => {
   const [supabaseClient] = useState(() => createBrowserSupabaseClient());
   const [username, setUsername] = useState(null);
   const [avatar, setAvatar] = useState(null);
+  const [showDropdown, setShowDropdown] = useState(false);
+  const dropdown:any = useRef(null);
+
+  useEffect(()=>{
+    if (!showDropdown) return;
+    function handleClick(event: { target: any; }) {
+      if (dropdown.current && !dropdown.current.contains(event.target)) {
+        setShowDropdown(false);
+      }
+    }
+    window.addEventListener("click", handleClick);
+    // clean up
+    return () => window.removeEventListener("click", handleClick);
+  })
+
   //check login useEffect
   useEffect(() => {
     const { data: authListener } = supabaseClient.auth.onAuthStateChange(
@@ -90,13 +105,6 @@ const Navbar = () => {
         </div>
       </div>
       <div className="flex gap-6">
-        {/* discuss with this content */}
-        {/* <div className="flex items-center gap-2 cursor-pointer">
-                    <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M27.449 7.85956C23.7238 5.07236 20.1552 5.15044 20.1552 5.15044L19.7904 5.56708C24.2189 6.89572 26.2768 8.84932 26.2768 8.84932C19.9411 5.361 11.8707 5.38596 5.28064 8.84932C5.28064 8.84932 7.41664 6.7914 12.1056 5.46276L11.8451 5.15012C11.8451 5.15012 8.3024 5.07204 4.55136 7.85924C4.55136 7.85924 0.800323 14.6061 0.800323 22.9159C0.800323 22.9159 2.98848 26.6669 8.7456 26.8493C8.7456 26.8493 9.70944 25.7031 10.4909 24.7133C7.1824 23.7236 5.93216 21.6656 5.93216 21.6656C8.01056 22.9661 10.1123 23.7802 12.7312 24.2967C16.9923 25.1738 22.2925 24.272 26.2509 21.6656C26.2509 21.6656 24.9485 23.7757 21.536 24.7396C22.3174 25.7034 23.2554 26.8234 23.2554 26.8234C29.0118 26.6413 31.2 22.8903 31.2 22.9162C31.2 14.6064 27.449 7.85956 27.449 7.85956ZM11.1418 20.4938C9.68288 20.4938 8.4848 19.2173 8.4848 17.6282C8.59136 13.8228 13.719 13.8346 13.799 17.6282C13.7987 19.2173 12.6266 20.4938 11.1418 20.4938ZM20.6499 20.4938C19.191 20.4938 17.993 19.2173 17.993 17.6282C18.1101 13.8301 23.1738 13.8285 23.3072 17.6282C23.3069 19.2173 22.1347 20.4938 20.6499 20.4938Z" fill="white" />
-                    </svg>
-                    <div>Discod</div>
-                </div> */}
         {!user ? (
           <Link
             href="/login"
@@ -105,15 +113,45 @@ const Navbar = () => {
             Log in
           </Link>
         ) : (
-          <div className="flex items-center space-x-3 pl-5 p-5 pb-3 pt-3">
-            <Image
-              src={Avatar(user?.user_metadata,avatar)}
-              width={32}
-              height={32}
-              className="rounded-full"
-              alt={`avatar of ${user?.email}`}
-            />
-            <p>{Username(username)}</p>
+          <div className=" pl-5 p-5 pb-3 pt-3 cursor-pointer relative select-none">
+            <div ref={dropdown} className="flex items-center space-x-3" onClick={()=>setShowDropdown(!showDropdown)}>
+              <Image
+                src={Avatar(user?.user_metadata, avatar)}
+                width={32}
+                height={32}
+                className="rounded-full"
+                alt={`avatar of ${user?.email}`}
+              />
+              <p>{Username(username)}</p>
+            </div>
+            {showDropdown && (
+              <div className="absolute bg-[#1E1E1E] rounded-md w-[200px] mt-5 right-10 border-[#383838] border">
+                {/* dropdown */}
+                <div className="flex flex-col gap-2 py-2 border-b border-[#383838]">
+                  <Link href="/profile" className="p-2 hover:bg-[#2E2E2E]">
+                    Profile
+                  </Link>
+                </div>
+                <div className="flex flex-col gap-2 py-2 border-b border-[#383838]">
+                  <Link href="/profile" className="p-2 hover:bg-[#2E2E2E]">
+                    Edit Profile
+                  </Link>
+                </div>
+                <div className="flex flex-col gap-2 py-2 border-b border-[#383838]">
+                  <Link href="/profile" className="p-2 hover:bg-[#2E2E2E]">
+                    My Prompts
+                  </Link>
+                  <Link href="/profile" className="p-2 hover:bg-[#2E2E2E]">
+                    My Favorites
+                  </Link>
+                </div>
+                <div className="flex flex-col gap-2 py-2">
+                  <Link href="/profile" className="p-2 hover:bg-[#2E2E2E]">
+                    Logout
+                  </Link>
+                </div>
+              </div>
+            )}
           </div>
         )}
       </div>
