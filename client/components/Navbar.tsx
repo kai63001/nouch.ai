@@ -16,9 +16,16 @@ const Navbar = () => {
   const [username, setUsername] = useState(null);
   const [avatar, setAvatar] = useState(null);
   const [showDropdown, setShowDropdown] = useState(false);
-  const dropdown:any = useRef(null);
+  const [showDropdownHamburger, setShowDropdownHamburger] = useState(false);
+  const dropdown: any = useRef(null);
+  const dropdownHamburger: any = useRef(null);
+  const [screemSize, setScreemSize] = useState(0)
 
-  useEffect(()=>{
+  useEffect(() => {
+    setScreemSize(window.innerWidth)
+  }, [screemSize])
+
+  useEffect(() => {
     if (!showDropdown) return;
     function handleClick(event: { target: any; }) {
       if (dropdown.current && !dropdown.current.contains(event.target)) {
@@ -28,6 +35,18 @@ const Navbar = () => {
     window.addEventListener("click", handleClick);
     // clean up
     return () => window.removeEventListener("click", handleClick);
+  })
+
+  useEffect(() => {
+    if (!showDropdownHamburger) return;
+    function handleClickHamburger(event: { target: any; }) {
+      if (dropdownHamburger.current && !dropdownHamburger.current.contains(event.target)) {
+        setShowDropdownHamburger(false);
+      }
+    }
+    window.addEventListener("click", handleClickHamburger);
+    // clean up
+    return () => window.removeEventListener("click", handleClickHamburger);
   })
 
   //check login useEffect
@@ -71,9 +90,27 @@ const Navbar = () => {
   //useEffect when localStorage is updated
   return (
     <nav className={`flex justify-between p-8 ${quicksand.className}`}>
-      <Link href='/'>
-        <Image width={100} height={40} src={'/icon/logo-nouch.svg'} alt={"logo-nouch"} />
-      </Link>
+      <div className="flex gap-2 items-center">
+        {screemSize < 500 && <div ref={dropdownHamburger} className="p-[10px] bg-[#242627] active:bg-[#414446] rounded-[12px]" onClick={() => setShowDropdownHamburger(!showDropdownHamburger)} ><Image width={20} height={20} src={"/icon/hamburger.svg"} alt={"hamburger"} /></div>}
+        <Link href='/'>
+          <Image width={100} height={40} src={'/icon/logo-nouch.svg'} alt={"logo-nouch"} />
+        </Link>
+        {showDropdownHamburger && (
+          <div >
+            {/*  backdrop-blur-sm  for add blur */}
+            {screemSize < 500 && <div className="w-[100vw] h-[100vh] top-0 left-0 bg-black/70 fixed z-[49]" />}
+            <div className="shadow-[0_35px_60px_-15px_blur(8px)] absolute bg-[#1E1E1E] flex items-center flex-col rounded-md w-full gap-[16px] top-24 left-0 lg:left-10 z-50">
+              <div className="mt-[24px]"><Image width={100} height={40} src={'/icon/logo-nouch.svg'} alt={"logo-nouch"} /></div>
+              <input className="bg-[#333434] w-[320px] rounded-[64px] h-11 pl-5" placeholder="Search items..." type="text" />
+              <div className="w-[320px] flex flex-col gap-[24px] mb-[24px]">
+                <div>Explore</div>
+                <div>Create</div>
+                <div>Docs</div>
+              </div>
+            </div>
+          </div>
+        )}
+      </div>
       <div className="hidden gap-6 items-center lg:flex">
         <div className="hover:underline cursor-pointer">Explore</div>
         <div className="hover:underline cursor-pointer">Create</div>
@@ -94,8 +131,8 @@ const Navbar = () => {
             Log in
           </Link>
         ) : (
-          <div className=" pl-5 p-5 pb-3 pt-3 cursor-pointer relative select-none">
-            <div ref={dropdown} className="flex items-center space-x-3" onClick={()=>setShowDropdown(!showDropdown)}>
+          <div className="pl-3 pr-3 lg:pl-5 lg:p-5 pb-3 pt-3 cursor-pointer relative select-none">
+            <div ref={dropdown} className="flex items-center space-x-0 lg:space-x-3" onClick={() => setShowDropdown(!showDropdown)}>
               <Image
                 src={Avatar(user?.user_metadata, avatar)}
                 width={32}
@@ -103,33 +140,36 @@ const Navbar = () => {
                 className="rounded-full"
                 alt={`avatar of ${user?.email}`}
               />
-              <p>{Username(username)}</p>
+              <p>{screemSize > 500 && Username(username)}</p>
             </div>
             {showDropdown && (
-              <div className="absolute bg-[#1E1E1E] rounded-md w-[200px] mt-5 right-10 border-[#383838] border z-50">
-                {/* dropdown */}
-                <div className="flex flex-col gap-2 py-2 border-b border-[#383838]">
-                  <Link href="/profile" className="p-2 hover:bg-[#2E2E2E]">
-                    Profile
-                  </Link>
-                </div>
-                <div className="flex flex-col gap-2 py-2 border-b border-[#383838]">
-                  <Link href="/profile" className="p-2 hover:bg-[#2E2E2E]">
-                    Edit Profile
-                  </Link>
-                </div>
-                <div className="flex flex-col gap-2 py-2 border-b border-[#383838]">
-                  <Link href="/profile" className="p-2 hover:bg-[#2E2E2E]">
-                    My Prompts
-                  </Link>
-                  <Link href="/profile" className="p-2 hover:bg-[#2E2E2E]">
-                    My Favorites
-                  </Link>
-                </div>
-                <div className="flex flex-col gap-2 py-2">
-                  <Link href="/profile" className="p-2 hover:bg-[#2E2E2E]">
-                    Logout
-                  </Link>
+              <div>
+                {screemSize < 500 && <div className="w-[100vw] h-[100vh] top-0 left-0 bg-black/70 fixed z-[49]" />}
+                <div className="absolute bg-[#1E1E1E] rounded-md w-[200px] mt-5 right-0 lg:right-10 border-[#383838] border z-50">
+                  {/* dropdown */}
+                  <div className="flex flex-col gap-2 py-2 border-b border-[#383838]">
+                    <Link href="/profile" className="p-2 hover:bg-[#2E2E2E]">
+                      Profile
+                    </Link>
+                  </div>
+                  <div className="flex flex-col gap-2 py-2 border-b border-[#383838]">
+                    <Link href="/profile" className="p-2 hover:bg-[#2E2E2E]">
+                      Edit Profile
+                    </Link>
+                  </div>
+                  <div className="flex flex-col gap-2 py-2 border-b border-[#383838]">
+                    <Link href="/profile" className="p-2 hover:bg-[#2E2E2E]">
+                      My Prompts
+                    </Link>
+                    <Link href="/profile" className="p-2 hover:bg-[#2E2E2E]">
+                      My Favorites
+                    </Link>
+                  </div>
+                  <div className="flex flex-col gap-2 py-2">
+                    <Link href="/profile" className="p-2 hover:bg-[#2E2E2E]">
+                      Logout
+                    </Link>
+                  </div>
                 </div>
               </div>
             )}
