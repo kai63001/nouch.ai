@@ -13,7 +13,7 @@ const Footer: FC = () => {
                     <div className="mt-[16px] flex gap-[24px] justify-center w-full lg:w-fit lg:justify-start">
                         <div className="whitespace-nowrap">Support</div>
                         <div className="whitespace-nowrap">Privacy policy</div>
-                        <div className="whitespace-nowrap">Powered by Nouch.com</div>
+                        <div className="whitespace-nowrap w-[100px] truncate md:w-full">Powered by Nouch.com</div>
                     </div>
                     <div className="mt-[32px] lg:mt-[0px] flex gap-[24px] justify-center w-full lg:justify-start">
                         <Image width={24} className="cursor-pointer" height={24} src={'/icon/facebook-logo.svg'} alt={"logo-nouch-footer"} />
