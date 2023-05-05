@@ -2,6 +2,7 @@ import { Quicksand } from "next/font/google";
 import Header from "./Header";
 
 import dynamic from "next/dynamic";
+import Footer from "./Footer";
 const Navbar = dynamic(() => import("./Navbar"), { ssr: false });
 
 interface Layout {
@@ -25,6 +26,7 @@ const Layout = (props: Layout) => {
       <main className={`${props.disableMax ?? ('max-w-[1800px] mx-auto mt-3 px-2 xs:px-0')} ${quicksand.className}`}>
         {props.children}
       </main>
+      <Footer />
     </>
   );
 };

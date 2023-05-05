@@ -4,7 +4,6 @@ import Layout from "@/components/Layout";
 import { MOCK_CHATGPT_PROMT, MOCK_POPULAR_PROMT } from './mock'
 import PrototypeSection from "@/components/Home/PrototypeSection";
 import Image from "next/image";
-import Footer from "@/components/Footer";
 
 
 export default function Home() {
@@ -48,7 +47,7 @@ export default function Home() {
               </div>
             </div>
           </div>
-          <Footer />
+
         </div>
       </Layout>
     </div>

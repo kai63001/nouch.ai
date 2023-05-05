@@ -19,7 +19,7 @@ const Card: FC<CardProps> = (props) => {
                 className="select-none flex felx-col items-center justify-center mr-5"
             >
                 <div>
-                    <div className="cursor-pointer relative w-[250px] rounded-t-[16px] h-[220px] bg-teal-700">
+                    <div className="cursor-pointer relative w-[250px] rounded-t-[16px] h-[220px] bg-white">
                         <Image fill src={content.img} alt={`${content.name}-img`} />
                     </div>
                     <div className="cursor-pointer relative flex flex-col gap-[4px] w-[250px] rounded-b-[16px] bg-[#242627] p-[12px]">

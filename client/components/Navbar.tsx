@@ -4,7 +4,7 @@ import { useUser } from "@supabase/auth-helpers-react";
 import { Quicksand } from "next/font/google";
 import Image from "next/image";
 import Link from "next/link";
-import { useEffect, useRef, useState } from "react";
+import { MouseEvent, useEffect, useRef, useState } from "react";
 
 const quicksand = Quicksand({
   weight: "700",
@@ -37,17 +37,18 @@ const Navbar = () => {
     return () => window.removeEventListener("click", handleClick);
   })
 
-  useEffect(() => {
+  const HandleLeftbarClickOutside = (e: MouseEvent<HTMLDivElement>) => {
     if (!showDropdownHamburger) return;
     function handleClickHamburger(event: { target: any; }) {
       if (dropdownHamburger.current && !dropdownHamburger.current.contains(event.target)) {
         setShowDropdownHamburger(false);
       }
     }
-    window.addEventListener("click", handleClickHamburger);
+    // window.addEventListener("click", handleClickHamburger);
+    handleClickHamburger(e)
     // clean up
-    return () => window.removeEventListener("click", handleClickHamburger);
-  })
+    // return () => window.removeEventListener("click", handleClickHamburger);
+  }
 
   //check login useEffect
   useEffect(() => {
@@ -98,8 +99,8 @@ const Navbar = () => {
         {showDropdownHamburger && (
           <div >
             {/*  backdrop-blur-sm  for add blur */}
-            {screemSize < 500 && <div className="w-[100vw] h-[100vh] top-0 left-0 bg-black/70 fixed z-[49]" />}
-            <div className="shadow-[0_35px_60px_-15px_blur(8px)] absolute bg-[#1E1E1E] flex items-center flex-col rounded-md w-full gap-[16px] top-24 left-0 lg:left-10 z-50">
+            {screemSize < 500 && <div onClick={HandleLeftbarClickOutside} className="w-[100vw] h-[100vh] top-0 left-0 bg-black/70 fixed z-[49]" />}
+            <div className="shadow-[0_35px_60px_-15px_blur(8px)] absolute bg-[#1E1E1E] flex items-center flex-col rounded-md w-full gap-[16px] top-24 left-0 lg:left-10 z-[100]">
               <div className="mt-[24px]"><Image width={100} height={40} src={'/icon/logo-nouch.svg'} alt={"logo-nouch"} /></div>
               <input className="bg-[#333434] w-[320px] rounded-[64px] h-11 pl-5" placeholder="Search items..." type="text" />
               <div className="w-[320px] flex flex-col gap-[24px] mb-[24px]">
