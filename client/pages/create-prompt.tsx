@@ -18,7 +18,9 @@ const CreatePromptPage = () => {
         />
         <div id="dropdown-group" className="flex flex-row space-x-3">
           <div className="w-full">
-            <label htmlFor="model" className="block mt-4 mb-1">Model</label>
+            <label htmlFor="model" className="block mt-4 mb-1">
+              Model
+            </label>
             {/* selection */}
             <div className="relative">
               <select
@@ -27,7 +29,9 @@ const CreatePromptPage = () => {
                 className="border px-4 py-2 w-full rounded-md bg-transparent appearance-none"
               >
                 {/* placeholder */}
-                <option disabled selected>Select Model</option>
+                <option disabled selected>
+                  Select Model
+                </option>
                 <option value="1">1</option>
                 <option value="2">2</option>
               </select>
@@ -57,7 +61,9 @@ const CreatePromptPage = () => {
                 name="version"
                 className="border px-4 py-2 w-full rounded-md bg-transparent appearance-none"
               >
-                <option disabled selected>Select Model Version</option>
+                <option disabled selected>
+                  Select Model Version
+                </option>
                 <option value="1">1</option>
                 <option value="2">2</option>
               </select>
@@ -77,6 +83,19 @@ const CreatePromptPage = () => {
               </div>
             </div>
           </div>
+        </div>
+        {/* description */}
+        <div className="w-full">
+          <label htmlFor="description" className="block mt-4 mb-1">
+            Description
+          </label>
+          <textarea
+            id="description"
+            name="description"
+            className="border px-4 py-2 w-full rounded-md bg-transparent appearance-none"
+            placeholder="Explain what your prompt does for yours and what occasions it applies to..."
+            rows={4}
+          ></textarea>
         </div>
       </div>
     </Layout>
