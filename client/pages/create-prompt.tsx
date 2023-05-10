@@ -1,10 +1,34 @@
 import Layout from "@/components/Layout";
-// import CreatePromptModal from "@/components/popup/modal/createPrompt.modal";
+import DropdownPrice from "@/components/libs/dropdownPrice";
+import Stepper from "@/components/libs/stepper";
+import { useState } from "react";
 
 const CreatePromptPage = () => {
+  const [activeStep, setActiveStep] = useState(0);
+
   return (
     <Layout>
       <div className="max-w-3xl w-full m-auto">
+        <div className="mb-5">
+          <Stepper
+            steps={[
+              {
+                title: "Create Prompt",
+                id: 1,
+              },
+              {
+                title: "Prompt File",
+                id: 2,
+              },
+              {
+                title: "Payment Setup",
+                id: 3,
+              },
+            ]}
+            activeStep={activeStep}
+            setActiveStep={setActiveStep}
+          />
+        </div>
         <h1 className="text-2xl font-bold">Create your prompt</h1>
         <label htmlFor="title" className="block mt-4 mb-1">
           Name
@@ -29,7 +53,7 @@ const CreatePromptPage = () => {
                 className="border px-4 py-2 w-full rounded-md bg-transparent appearance-none"
               >
                 {/* placeholder */}
-                <option disabled selected>
+                <option value="" disabled selected>
                   Select Model
                 </option>
                 <option value="1">1</option>
@@ -61,7 +85,7 @@ const CreatePromptPage = () => {
                 name="version"
                 className="border px-4 py-2 w-full rounded-md bg-transparent appearance-none"
               >
-                <option disabled selected>
+                <option value="" disabled selected>
                   Select Model Version
                 </option>
                 <option value="1">1</option>
@@ -96,6 +120,14 @@ const CreatePromptPage = () => {
             placeholder="Explain what your prompt does for yours and what occasions it applies to..."
             rows={4}
           ></textarea>
+        </div>
+        <div className="w-4/12">
+          <DropdownPrice />
+        </div>
+        <div className="w-full mt-5">
+          <button className="w-2/12 text-2xl rounded-full py-3 bg-blue-500">
+            Next
+          </button>
         </div>
       </div>
     </Layout>
