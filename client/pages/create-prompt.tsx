@@ -6,6 +6,10 @@ import { useState } from "react";
 const CreatePromptPage = () => {
   const [activeStep, setActiveStep] = useState(0);
 
+  const nextStep = () => {
+    setActiveStep((prev) => prev + 1);
+  };
+
   return (
     <Layout>
       <div className="max-w-3xl w-full m-auto">
@@ -51,9 +55,10 @@ const CreatePromptPage = () => {
                 id="model"
                 name="model"
                 className="border px-4 py-2 w-full rounded-md bg-transparent appearance-none"
+                defaultValue={"0"}
               >
                 {/* placeholder */}
-                <option value="" disabled selected>
+                <option value="0" disabled >
                   Select Model
                 </option>
                 <option value="1">1</option>
@@ -84,8 +89,9 @@ const CreatePromptPage = () => {
                 id="version"
                 name="version"
                 className="border px-4 py-2 w-full rounded-md bg-transparent appearance-none"
+                defaultValue={"0"}
               >
-                <option value="" disabled selected>
+                <option value="0" disabled >
                   Select Model Version
                 </option>
                 <option value="1">1</option>
@@ -125,7 +131,12 @@ const CreatePromptPage = () => {
           <DropdownPrice />
         </div>
         <div className="w-full mt-5">
-          <button className="w-2/12 text-2xl rounded-full py-3 bg-blue-500">
+          <button
+            onClick={() => {
+              nextStep();
+            }}
+            className="w-2/12 text-2xl rounded-full py-3 bg-blue-500"
+          >
             Next
           </button>
         </div>

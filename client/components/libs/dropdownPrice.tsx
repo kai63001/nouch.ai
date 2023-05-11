@@ -1,13 +1,34 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 const DropdownPrice = () => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
 
   const customPriceRef: any = useRef(null);
 
+  const inputDropdownRef: any = useRef(null);
+
+  const dropdownRef: any = useRef(null);
+
   const priceList = [1.99, 2.99, 3.99, 4.99, 5.99, 0.0];
 
   const [price, setPrice] = useState(-1);
+
+  useEffect(() => {
+    const handleClickOutside = (event: any) => {
+      if (
+        (dropdownRef.current &&
+          !dropdownRef.current.contains(event.target) &&
+          !customPriceRef.current.contains(event.target)) &&
+        (inputDropdownRef.current &&
+          !inputDropdownRef.current.contains(event.target))
+      ) {
+        setDropdownOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
 
   return (
     <>
@@ -17,6 +38,7 @@ const DropdownPrice = () => {
       <div className="border-2 rounded-md relative">
         <div
           className="flex justify-between items-center cursor-pointer px-2 py-2 select-none"
+          ref={inputDropdownRef}
           onClick={() => {
             setDropdownOpen(!dropdownOpen);
           }}
@@ -38,7 +60,10 @@ const DropdownPrice = () => {
           </div>
         </div>
         {dropdownOpen && (
-          <div className="absolute top-12 bg-[#242627] w-full left-0 rounded-md border border-gray-800 px-3 py-2 flex flex-col">
+          <div
+            ref={dropdownRef}
+            className="absolute top-12 bg-[#242627] w-full left-0 rounded-md border border-gray-800 px-3 py-2 flex flex-col"
+          >
             <p>Estimated Price</p>
             {/* radio */}
             {priceList.map((priceData, index) => (

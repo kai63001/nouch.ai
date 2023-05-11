@@ -17,7 +17,7 @@ const Stepper = ({ steps, activeStep, setActiveStep }: stepperProps) => {
               className={`border-2 w-14 h-14 flex rounded-full cursor-pointer font-bold ${
                 activeStep === index ? "border-[#3B82F6]" : "border-[#37393A]"
               }`}
-              onClick={() => setActiveStep(index)}
+            //   onClick={() => setActiveStep(index)}
             >
               <div className="m-auto">{step.id}</div>
             </div>
