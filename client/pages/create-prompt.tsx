@@ -1,5 +1,6 @@
 import Layout from "@/components/Layout";
 import CreatePromptForm from "@/components/form/createPrompt/createPrompt";
+import FormCreateChatGptPrompt from "@/components/form/createPrompt/prompt/chatGpt";
 import Stepper from "@/components/libs/stepper";
 import formPromptDataSlice, {
   setFromCreatePrompt,
@@ -27,7 +28,7 @@ const CreatePromptPage = () => {
   const renderStep = () => {
     switch (fromCreatePrompt.step) {
       case 1:
-        return <div>12</div>;
+        return <FormCreateChatGptPrompt/>;
       case 2:
         return <CreatePromptForm />;
       case 3:
