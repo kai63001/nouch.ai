@@ -4,6 +4,7 @@ import { useUser } from "@supabase/auth-helpers-react";
 import { Quicksand } from "next/font/google";
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/router";
 import { useEffect, useRef, useState } from "react";
 
 const quicksand = Quicksand({
@@ -12,6 +13,7 @@ const quicksand = Quicksand({
 });
 
 const Navbar = () => {
+  const router = useRouter();
   const [supabaseClient] = useState(() => createBrowserSupabaseClient());
   const [username, setUsername] = useState(null);
   const [avatar, setAvatar] = useState(null);
@@ -70,6 +72,11 @@ const Navbar = () => {
       authListener.subscription.unsubscribe();
     };
   }, []);
+
+  const logout = async () => {
+    await supabaseClient.auth.signOut();
+    router.push("/");
+  };
 
   const getUserData = async (event: any, session: any) => {
     const { data: user, error } = await supabaseClient
@@ -166,9 +173,9 @@ const Navbar = () => {
                     </Link>
                   </div>
                   <div className="flex flex-col gap-2 py-2">
-                    <Link href="/profile" className="p-2 hover:bg-[#2E2E2E]">
+                    <div onClick={logout} className="p-2 hover:bg-[#2E2E2E]">
                       Logout
-                    </Link>
+                    </div>
                   </div>
                 </div>
               </div>

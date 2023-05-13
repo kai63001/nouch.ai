@@ -1,13 +1,40 @@
 import Layout from "@/components/Layout";
 import CreatePromptForm from "@/components/form/createPrompt/createPrompt";
 import Stepper from "@/components/libs/stepper";
+import formPromptDataSlice, {
+  setFromCreatePrompt,
+} from "@/store/formPromptDataSlice";
+import { RootState } from "@/store/store";
 import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
 const CreatePromptPage = () => {
-  const [activeStep, setActiveStep] = useState(0);
+  const fromCreatePrompt = useSelector(
+    (state: RootState) => state.FromCreatePromptSlice
+  );
 
-  const nextStep = () => {
-    setActiveStep((prev) => prev + 1);
+  const dispath = useDispatch();
+
+  const setActiveStep = (value: any) => {
+    dispath(
+      setFromCreatePrompt({
+        ...fromCreatePrompt,
+        step: value,
+      })
+    );
+  };
+
+  const renderStep = () => {
+    switch (fromCreatePrompt.step) {
+      case 1:
+        return <div>12</div>;
+      case 2:
+        return <CreatePromptForm />;
+      case 3:
+        return <CreatePromptForm />;
+      default:
+        return <CreatePromptForm />;
+    }
   };
 
   return (
@@ -29,11 +56,11 @@ const CreatePromptPage = () => {
                 id: 3,
               },
             ]}
-            activeStep={activeStep}
+            activeStep={fromCreatePrompt.step}
             setActiveStep={setActiveStep}
           />
         </div>
-        <CreatePromptForm/>
+        {renderStep()}
       </div>
     </Layout>
   );

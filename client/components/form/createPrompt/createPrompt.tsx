@@ -2,12 +2,17 @@ import DropdownPrice from "@/components/libs/dropdownPrice";
 import { setFromCreatePrompt } from "@/store/formPromptDataSlice";
 import { RootState } from "@/store/store";
 import { useDispatch, useSelector } from "react-redux";
+import { Model } from "@/libs/model";
+import { useState } from "react";
 
 const CreatePromptForm = () => {
+  const model:any = Model
   //use selection
   const fromCreatePrompt = useSelector(
     (state: RootState) => state.FromCreatePromptSlice
   );
+
+  const [version, setVersion] = useState([]);
 
   const dispath = useDispatch();
 
@@ -19,6 +24,13 @@ const CreatePromptForm = () => {
       })
     );
   };
+
+  const handleOnModel = (data: string) => {
+    //get version from Model
+    const version = model[data].version;
+    setVersion(version);
+  };
+  
 
   return (
     <>
@@ -46,14 +58,20 @@ const CreatePromptForm = () => {
               name="model"
               className="border px-4 py-2 w-full rounded-md bg-transparent appearance-none"
               defaultValue={"0"}
-              onChange={(e) => setDispath("model", e.target.value)}
+              onChange={(e) => {
+                setDispath("model", e.target.value)
+                handleOnModel(e.target.value)
+              }}
             >
               {/* placeholder */}
               <option value="0" disabled>
                 Select Model
               </option>
-              <option value="1">1</option>
-              <option value="2">2</option>
+              {Object.keys(Model).map((item,key) => (
+                <option key={key} value={item}>
+                  {item}
+                </option>
+              ))}
             </select>
             <div className="absolute inset-y-0 right-0 flex items-center px-2 pointer-events-none">
               <svg
@@ -86,8 +104,11 @@ const CreatePromptForm = () => {
               <option value="0" disabled>
                 Select Model Version
               </option>
-              <option value="1">1</option>
-              <option value="2">2</option>
+              {version.map((item,key) => (
+                <option key={key} value={item}>
+                  {item}
+                </option>
+              ))}
             </select>
             <div className="absolute inset-y-0 right-0 flex items-center px-2 pointer-events-none">
               <svg
@@ -125,7 +146,9 @@ const CreatePromptForm = () => {
       </div>
       <div className="w-full mt-5">
         <button
-          onClick={() => {}}
+          onClick={() => {
+            setDispath("step", 1);
+          }}
           className="w-2/12 text-2xl rounded-full py-3 bg-blue-500"
         >
           Next
