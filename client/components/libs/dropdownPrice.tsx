@@ -1,6 +1,25 @@
+import { setFromCreatePrompt } from "@/store/formPromptDataSlice";
+import { RootState } from "@/store/store";
 import { useEffect, useRef, useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
 
 const DropdownPrice = () => {
+  //use selection
+  const fromCreatePrompt = useSelector(
+    (state: RootState) => state.FromCreatePromptSlice
+  );
+
+  const dispath = useDispatch();
+
+  const setDispath = (field: any, value: any) => {
+    dispath(
+      setFromCreatePrompt({
+        ...fromCreatePrompt,
+        [field]: value,
+      })
+    );
+  };
+  
   const [dropdownOpen, setDropdownOpen] = useState(false);
 
   const customPriceRef: any = useRef(null);
@@ -16,11 +35,11 @@ const DropdownPrice = () => {
   useEffect(() => {
     const handleClickOutside = (event: any) => {
       if (
-        (dropdownRef.current &&
-          !dropdownRef.current.contains(event.target) &&
-          !customPriceRef.current.contains(event.target)) &&
-        (inputDropdownRef.current &&
-          !inputDropdownRef.current.contains(event.target))
+        dropdownRef.current &&
+        !dropdownRef.current.contains(event.target) &&
+        !customPriceRef.current.contains(event.target) &&
+        inputDropdownRef.current &&
+        !inputDropdownRef.current.contains(event.target)
       ) {
         setDropdownOpen(false);
       }
@@ -76,6 +95,7 @@ const DropdownPrice = () => {
                   defaultChecked={priceData === price}
                   onChange={() => {
                     setPrice(priceData);
+                    setDispath("price", priceData);
                   }}
                 />
                 <label htmlFor={`price${index}`} className="w-full">
@@ -109,6 +129,7 @@ const DropdownPrice = () => {
                       //check if input is number
                       if (isNaN(e.target.value)) return;
                       setPrice(e.target.value);
+                      setDispath("price", e.target.value);
                     }}
                   />
                   <span>USD</span>

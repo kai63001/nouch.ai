@@ -1,9 +1,11 @@
+import FromCreatePromptSlice from './formPromptDataSlice';
 import { configureStore } from '@reduxjs/toolkit'
 import UserDataSlice from './userDataSlice'
 
 export const store = configureStore({
   reducer: {
-    UserDataSlice
+    UserDataSlice,
+    FromCreatePromptSlice
   }
 })
 
