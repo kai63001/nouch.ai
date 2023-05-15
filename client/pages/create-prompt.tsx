@@ -1,12 +1,12 @@
 import Layout from "@/components/Layout";
 import CreatePromptForm from "@/components/form/createPrompt/createPrompt";
 import FormCreateChatGptPrompt from "@/components/form/createPrompt/prompt/chatGpt";
+import PaymentSetup from "@/components/form/createPrompt/prompt/payment";
 import Stepper from "@/components/libs/stepper";
 import formPromptDataSlice, {
   setFromCreatePrompt,
 } from "@/store/formPromptDataSlice";
 import { RootState } from "@/store/store";
-import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 const CreatePromptPage = () => {
@@ -30,9 +30,7 @@ const CreatePromptPage = () => {
       case 1:
         return <FormCreateChatGptPrompt/>;
       case 2:
-        return <CreatePromptForm />;
-      case 3:
-        return <CreatePromptForm />;
+        return <PaymentSetup/>;
       default:
         return <CreatePromptForm />;
     }

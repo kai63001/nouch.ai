@@ -1,4 +1,7 @@
-import React from "react";
+import { setFromCreatePrompt } from "@/store/formPromptDataSlice";
+import { RootState } from "@/store/store";
+import React, { useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
 
 interface stepperProps {
   steps: any;
@@ -7,6 +10,21 @@ interface stepperProps {
 }
 
 const Stepper = ({ steps, activeStep, setActiveStep }: stepperProps) => {
+  const fromCreatePrompt = useSelector(
+    (state: RootState) => state.FromCreatePromptSlice
+  );
+
+  const dispath = useDispatch();
+
+  const setDispath = (field: any, value: any) => {
+    dispath(
+      setFromCreatePrompt({
+        ...fromCreatePrompt,
+        [field]: value,
+      })
+    );
+  };
+
   return (
     <div className="flex justify-between px-10 mb-10">
       {steps.map((step: any, index: any) => (
@@ -17,7 +35,7 @@ const Stepper = ({ steps, activeStep, setActiveStep }: stepperProps) => {
               className={`border-2 w-14 h-14 flex rounded-full cursor-pointer font-bold ${
                 activeStep === index ? "border-[#3B82F6]" : "border-[#37393A]"
               }`}
-            //   onClick={() => setActiveStep(index)}
+              onClick={() => setDispath("step", ~~step.id - 1)}
             >
               <div className="m-auto">{step.id}</div>
             </div>
