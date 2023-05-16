@@ -247,5 +247,85 @@ export const MOCK_CHATGPT_PROMT = {
             price: '0.99',
             currency: 'USD'
         },
+        {
+            img: '/icon/mockImg.png',
+            name: 'Spider-Man Cyberpunk.',
+            author: 'Copter',
+            model: 'ChatGPT',
+            price: '0.99',
+            currency: 'USD'
+        },
+        {
+            img: '/icon/mockImg.png',
+            name: 'Spider-Man Cyberpunk.',
+            author: 'Copter',
+            model: 'ChatGPT',
+            price: '0.99',
+            currency: 'USD'
+        },
+        {
+            img: '/icon/mockImg.png',
+            name: 'Spider-Man Cyberpunk.',
+            author: 'Copter',
+            model: 'ChatGPT',
+            price: '0.99',
+            currency: 'USD'
+        },
+        {
+            img: '/icon/mockImg.png',
+            name: 'Spider-Man Cyberpunk.',
+            author: 'Copter',
+            model: 'ChatGPT',
+            price: '0.99',
+            currency: 'USD'
+        },
+        {
+            img: '/icon/mockImg.png',
+            name: 'Spider-Man Cyberpunk.',
+            author: 'Copter',
+            model: 'ChatGPT',
+            price: '0.99',
+            currency: 'USD'
+        },
+        {
+            img: '/icon/mockImg.png',
+            name: 'Spider-Man Cyberpunk.',
+            author: 'Copter',
+            model: 'ChatGPT',
+            price: '0.99',
+            currency: 'USD'
+        },
+        {
+            img: '/icon/mockImg.png',
+            name: 'Spider-Man Cyberpunk.',
+            author: 'Copter',
+            model: 'ChatGPT',
+            price: '0.99',
+            currency: 'USD'
+        },
+        {
+            img: '/icon/mockImg.png',
+            name: 'Spider-Man Cyberpunk.',
+            author: 'Copter',
+            model: 'ChatGPT',
+            price: '0.99',
+            currency: 'USD'
+        },
+        {
+            img: '/icon/mockImg.png',
+            name: 'Spider-Man Cyberpunk.',
+            author: 'Copter',
+            model: 'ChatGPT',
+            price: '0.99',
+            currency: 'USD'
+        },
+        {
+            img: '/icon/mockImg.png',
+            name: 'Spider-Man Cyberpunk.',
+            author: 'Copter',
+            model: 'ChatGPT',
+            price: '0.99',
+            currency: 'USD'
+        },
     ]
 }

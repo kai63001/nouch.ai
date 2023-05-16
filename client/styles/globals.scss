@@ -3,8 +3,8 @@
 @tailwind utilities;
 
 :root {
-  --colors-brand: #3887F3 !important;
-  --colors-brandAccent: #1DA1F2 !important;
+  --colors-brand: #3887f3 !important;
+  --colors-brandAccent: #1da1f2 !important;
 }
 
 html,
@@ -15,6 +15,18 @@ body {
 
 .bg-red {
   background-color: #ff0000 !important;
+}
+
+/* scroll bar */
+::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #1e1e1e;
+  border-radius: 10px;
+  overflow: auto;
 }
 
 .ReactModal__Content {
