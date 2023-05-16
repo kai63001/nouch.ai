@@ -14,7 +14,7 @@ interface Layout {
 }
 
 const quicksand = Quicksand({
-  weight: "400",
+  weight: ["400","600"],
   subsets: ["latin"],
 });
 

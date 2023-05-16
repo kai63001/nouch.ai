@@ -16,7 +16,6 @@ export const userDataSlice = createSlice({
   initialState,
   reducers: {
     setUserData: (state, action: PayloadAction<UserDataSliceWidget>) => {
-      console.log("setUserData", action.payload);
       return action.payload;
     },
   },
