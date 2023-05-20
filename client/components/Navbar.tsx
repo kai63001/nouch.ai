@@ -53,7 +53,8 @@ const Navbar = () => {
 
   //check login useEffect
   useEffect(() => {
-    const { data: authListener } = supabaseClient.auth.onAuthStateChange(
+    if(!supabaseClient) return;
+    const { data: authListener } = supabaseClient?.auth?.onAuthStateChange(
       async (event, session) => {
         // check local storage for user data
         const userData = localStorage.getItem("user");
